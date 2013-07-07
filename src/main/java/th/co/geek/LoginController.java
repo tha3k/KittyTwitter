@@ -1,5 +1,6 @@
 package th.co.geek;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import th.co.geek.action.UserLoginAction;
 import th.co.geek.bean.UserProfile;
+import th.co.geek.constant.Constant;
 import th.co.geek.model.Login;
 
 @Controller
@@ -22,7 +24,7 @@ public class LoginController {
 	
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public ModelAndView onSubmit(@ModelAttribute("loginForm")@Valid Login login, BindingResult result) {
+	public ModelAndView onSubmit(@ModelAttribute("loginForm")@Valid Login login, BindingResult result, HttpSession session) {
 		System.out.println(login);
 		
 		if (result.hasErrors()) {
@@ -35,6 +37,7 @@ public class LoginController {
 		try {
 			System.out.println("check authenticate");
 			UserProfile userProfile = loginAction.authenticate(login.getUserName(), login.getPassword());
+			session.setAttribute(Constant.UserProfileSession, userProfile);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -45,7 +48,7 @@ public class LoginController {
 			return new ModelAndView("loginForm");
 		}
 		System.out.println("loginSuccess");
-		return new ModelAndView("timelineForm","login",login);
+		return new ModelAndView("timelineForm","timelineForm",login);
 	}
 	
 	@RequestMapping(value = "/login",  method = RequestMethod.GET)
@@ -60,6 +63,10 @@ public class LoginController {
 		return login;
 	}
 	
+	/*@ModelAttribute("posts")
+	public List<Post> getTimeline() {
+		get post 
+	}*/
 	
 	
 	
