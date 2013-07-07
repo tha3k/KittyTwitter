@@ -16,12 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import th.co.geek.model.Register;
 
 @Controller
-public class RegisterController {
-	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
+public class LoginController {
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView onSubmit(@ModelAttribute("registerForm")@Valid Register register, BindingResult result) {
+	public ModelAndView onSubmit(@ModelAttribute("loginForm")@Valid Register register, BindingResult result) {
 		System.out.println(register);
 		
 		if(!register.getConfirmPassword().equals(register.getPassword())){
@@ -43,7 +43,7 @@ public class RegisterController {
 		return new ModelAndView("registerSuccess","register",register);
 	}
 	
-	@RequestMapping(value = "/register",  method = RequestMethod.GET)
+	@RequestMapping(value = "/login",  method = RequestMethod.GET)
 	public String register() {
 		return "registerForm";
 	}

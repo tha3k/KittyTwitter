@@ -1,14 +1,25 @@
 package th.co.geek.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 
 public class Register {
 	
+	@NotBlank
 	String userName;
+	
+	@NotBlank 
+	@Email
 	String email;
  
-	
+	@NotBlank
 	String password;
+	
+	
 	String confirmPassword;
+	
+	
 	public String getUserName() {
 		return userName;
 	}
