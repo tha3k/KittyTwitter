@@ -12,6 +12,18 @@ public class UserProfile {
 	
 	private ArrayList<UserPost> postList = new ArrayList<UserPost>();
 
+	
+	
+	public UserProfile() {	
+	}
+	
+	public UserProfile(String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+
 	public String getName() {
 		return name;
 	}
