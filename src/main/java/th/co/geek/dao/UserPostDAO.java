@@ -1,16 +1,19 @@
 package th.co.geek.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import redis.clients.jedis.Jedis;
 import th.co.geek.action.exception.UserNotfoundException;
 import th.co.geek.bean.DatabaseKey;
 import th.co.geek.bean.UserPost;
-import th.co.geek.bean.UserProfile;
 
 public class UserPostDAO {
 	private static UserPostDAO _instance = new UserPostDAO();
+	public static SimpleDateFormat format = new SimpleDateFormat("MMM d, yyyy, HH:mm aa");
+
 	
 	private UserPostDAO() {		
 	}
@@ -65,7 +68,7 @@ public class UserPostDAO {
 	public UserPost mockUserPost() {
 		UserPost eachPost = new UserPost();
 		eachPost.setPostUser("tha3k");
-		eachPost.setPostDate("20130101");
+		eachPost.setPostDate(format.format(new Date()));
 		eachPost.setPostContent("test post for mock!!");
 		eachPost.setCanDelete(false);
 		

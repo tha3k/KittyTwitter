@@ -1,10 +1,13 @@
 package th.co.geek.bean;
 
+import java.text.SimpleDateFormat;
+
 
 public class UserPost {
 	private String postDate;
 	private String postUser;
 	private String postContent;
+	
 
 	private boolean canDelete;
 
