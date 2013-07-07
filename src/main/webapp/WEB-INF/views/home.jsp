@@ -5,10 +5,22 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+<div class="container">
+	<div id="nav">
+		<a href="/">Home</a> |
+		
+			<a href="/login/">Sign in</a>
+		
+	</div>
+	<h1>JAVA Mini Twitter</h1>
+	
 
-<P>  The time on the server is ${serverTime}. </P>
+	<p>Welcome anonymous user! 
+      You need to <a href="login/">Sign in</a> 
+      before you can use this application.</p>
+    <p>If you don't have an account, please <a href="register/">Sign up now!</a></p>
+
+
+</div>
 </body>
 </html>
