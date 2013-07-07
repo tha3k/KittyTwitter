@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<link rel="stylesheet" href="style.css" type="text/css"/>
 <html>
 <head>
 	<title>Home</title>
@@ -7,9 +8,9 @@
 <body>
 <div class="container">
 	<div id="nav">
-		<a href="/">Home</a> |
+		<a href="/geek">Home</a> |
 		
-			<a href="/login/">Sign in</a>
+			<a href="login/">Sign in</a>
 		
 	</div>
 	<h1>JAVA Mini Twitter</h1>

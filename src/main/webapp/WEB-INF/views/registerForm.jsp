@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<link rel="stylesheet" href="../style.css" type="text/css"/>
 <html>
 <head>
 	<title>Register</title>
@@ -20,7 +21,7 @@
 </style>
 </head>
 <body>
-
+<div class="container">
 <h2>Spring's form tags example</h2>
  
 	<form:form method="POST" commandName="registerForm">
@@ -61,6 +62,6 @@
 	</form:form>
 
 
-
+</div>
 </body>
 </html>

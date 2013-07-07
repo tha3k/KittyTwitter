@@ -29,17 +29,14 @@ public class TimelineController {
 			return new ModelAndView("timelineForm");
 		}
 		
-		UserLoginAction loginAction = new UserLoginAction();
 		
 		// check login
 		try {
-			UserProfile userProfile = loginAction.authenticate(login.getUserName(), login.getPassword());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//not found user.
-			result.addError(new ObjectError("username", "Username Not Found. "));
 			return new ModelAndView("timelineForm");
 		}
 		
