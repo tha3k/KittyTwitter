@@ -2,6 +2,7 @@ package th.co.geek.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import redis.clients.jedis.Jedis;
 import th.co.geek.bean.DatabaseKey;
@@ -31,16 +32,24 @@ public class UserFollowDAO {
 		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
 		String key = DatabaseKey.FOLLOWER_PREFIX+userName;
 		
-		List<String> tmpFollowerList = jedis.lrange(key, 0, -1);
-		return new ArrayList<String>(tmpFollowerList);
+		Set<String> tmpFollowerSet = jedis.smembers(key);
+		return new ArrayList<String>(tmpFollowerSet);
 	}		
 		
 	public void addFollower(String userName, String follower) {
 		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
 		String key = DatabaseKey.FOLLOWER_PREFIX+userName;
 		
-		System.out.println("pusing follower :: "+follower);
-		jedis.rpush(key, follower);
+		System.out.println("pushing follower :: "+follower);
+		jedis.sadd(key, follower);
+	}
+
+	public void removeFollower(String userName, String follower) {
+		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
+		String key = DatabaseKey.FOLLOWER_PREFIX+userName;
+		
+		System.out.println("remove follower :: "+follower);
+		jedis.srem(key, follower);
 	}
 
 
@@ -49,18 +58,24 @@ public class UserFollowDAO {
 		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
 		String key = DatabaseKey.FOLLOWING_PREFIX+userName;
 		
-		List<String> tmpFollowingList = jedis.lrange(key, 0, -1);
-		return new ArrayList<String>(tmpFollowingList);
+		Set<String> tmpFollowingSet = jedis.smembers(key);
+		return new ArrayList<String>(tmpFollowingSet);
 	}		
 		
 	public void addFollowing(String userName, String following) {
 		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
 		String key = DatabaseKey.FOLLOWING_PREFIX+userName;
 		
-		System.out.println("pusing following :: "+following);
-		jedis.rpush(key, following);
+		System.out.println("pushing following :: "+following);
+		jedis.sadd(key, following);
 	}
-	
+	public void removeFollowing(String userName, String following) {
+		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
+		String key = DatabaseKey.FOLLOWER_PREFIX+userName;
+		
+		System.out.println("remove following :: "+following);
+		jedis.srem(key, following);
+	}	
 	
 	
 	
@@ -93,7 +108,8 @@ public class UserFollowDAO {
 		
 		UserFollowDAO a = new UserFollowDAO();
 		
-		a.addFollower("tha3k","ttttt2");
+		a.addFollower("tha3k","ttttt3");
+		a.removeFollower("tha3k","ttttt1");
 		System.out.println("all : "+a.getFollowerList("tha3k"));
 	}
 
