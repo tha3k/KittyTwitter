@@ -20,7 +20,7 @@ public class RegisterController {
 	private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
 	
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value="/register",   method = RequestMethod.POST)
 	public ModelAndView onSubmit(@ModelAttribute("registerForm")@Valid Register register, BindingResult result) {
 		System.out.println(register);
 		
@@ -47,6 +47,9 @@ public class RegisterController {
 	public String register() {
 		return "registerForm";
 	}
+	
+	
+	
 	
 	@ModelAttribute("registerForm")
 	public Register registerForm() {

@@ -16,7 +16,7 @@
 	
 
 	<p>Welcome anonymous user! 
-      You need to <a href="/login/">Sign in</a> 
+      You need to <a href="login/">Sign in</a> 
       before you can use this application.</p>
     <p>If you don't have an account, please <a href="register/">Sign up now!</a></p>
 

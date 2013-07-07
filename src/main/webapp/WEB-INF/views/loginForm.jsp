@@ -23,7 +23,7 @@
 
 <h2>Spring's form tags example</h2>
  
-	<form:form method="POST" commandName="registerForm">
+	<form:form method="POST" commandName="loginForm">
 		<form:errors path="*" cssClass="errorblock" element="div" />
 		<table>
 			<tr>
