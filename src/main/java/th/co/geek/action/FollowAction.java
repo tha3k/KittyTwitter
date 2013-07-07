@@ -10,7 +10,7 @@ public class FollowAction {
 	}
 	
 	public void unFollow(String userName, String password) throws Exception {
-		return authenticate(userName, password);
+		//return authenticate(userName, password);
 	}
 
 }

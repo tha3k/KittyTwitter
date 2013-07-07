@@ -45,7 +45,7 @@ public class LoginController {
 			return new ModelAndView("loginForm");
 		}
 		System.out.println("loginSuccess");
-		return new ModelAndView("loginSuccess","login",login);
+		return new ModelAndView("timelineForm","login",login);
 	}
 	
 	@RequestMapping(value = "/login",  method = RequestMethod.GET)
