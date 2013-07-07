@@ -16,7 +16,7 @@ Registration Completed Successfully
 	
 Thank you for registering. Your information has been
 saved in the database. Now you can either
-<a href="/login/">login</a> or go back to the
+<a href="/geek/login/">login</a> or go back to the
 <a href="/">main page</a>.
 
 </div>
