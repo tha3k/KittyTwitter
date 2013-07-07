@@ -10,6 +10,10 @@
 .error {
 	color: #ff0000;
 }
+.container {
+	width: 800px;
+	margin: 0px auto;
+}
  
 .errorblock {
 	color: #000;
@@ -44,7 +48,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="submit" /></td>
+				<td colspan="3"><input type="submit"  /></td>
 			</tr>
 		</table>
 	</form:form>

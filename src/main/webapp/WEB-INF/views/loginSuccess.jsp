@@ -2,6 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <link rel="stylesheet" href="../style.css" type="text/css"/>
 <html>
+<style>
+.error {
+	color: #ff0000;
+}
+.container {
+	width: 800px;
+	margin: 0px auto;
+}
+ 
+.errorblock {
+	color: #000;
+	background-color: #ffEEEE;
+	border: 3px solid #ff0000;
+	padding: 8px;
+	margin: 16px;
+}
+</style>
 <body>
 	<div class="container">
 	<div id="nav">

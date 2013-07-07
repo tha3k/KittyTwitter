@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import th.co.geek.action.UserLoginAction;
 import th.co.geek.bean.UserProfile;
@@ -24,11 +25,11 @@ public class LoginController {
 	
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public ModelAndView onSubmit(@ModelAttribute("loginForm")@Valid Login login, BindingResult result, HttpSession session) {
+	public String onSubmit(@ModelAttribute("loginForm")@Valid Login login, BindingResult result, HttpSession session, RedirectAttributes redirectAttrs) {
 		System.out.println(login);
 		
 		if (result.hasErrors()) {
-			return new ModelAndView("loginForm");
+			return "redirect:/login";
 		}
 		
 		UserLoginAction loginAction = new UserLoginAction();
@@ -45,10 +46,12 @@ public class LoginController {
 			//not found user.
 			result.addError(new ObjectError("username", "Username Not Found. "));
 			logger.error("not found user ");
-			return new ModelAndView("loginForm");
+			return "redirect:/loginForm";
+			
 		}
 		System.out.println("loginSuccess");
-		return new ModelAndView("timelineForm","timelineForm",login);
+		//redirectAttrs.addFlashAttribute("message", message);
+		return "redirect:/timeline" ;
 	}
 	
 	@RequestMapping(value = "/login",  method = RequestMethod.GET)
