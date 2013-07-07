@@ -1,6 +1,9 @@
 package th.co.geek.bean;
 
 public class DatabaseKey {
+	public static final String REDIS_SERVER = "localhost";
+
+	
 	public static final String USER_PREFIX = "user::";
 	
 	public static final String USER_NAME_KEY = "name";
