@@ -36,12 +36,14 @@
 	Here you can store and share bookmarks!</p>
 	
 	<p>Hi boy!
-      What is on your mind?</p> 
-    <form method="post" action="/microposts/create/"><div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='30f5e058185658844373e47c6d3feb29' /></div>
+      What is on your mind?</p>|| <%=request.getSession().getAttribute("userProfileSession") %>||
+    <form:form method="POST" commandName="timelineForm">
+    
 	<p><label for="id_content">Say it:</label> 
-	<textarea cols="40" rows="10" name="content" id="id_content"></textarea></p>
-	<input type="submit" value="post" />
-	</form>
+	 <form:textarea path="userName"/> 
+	<!-- <tr>
+				<td colspan="3"><input type="submit" /></td>
+			</tr> -->
 	
 	<table class="microposts">
 	
@@ -103,7 +105,7 @@
 	  </tr>
 	 
 	 </table>
-	
+</form:form>	
 
 
 </div>

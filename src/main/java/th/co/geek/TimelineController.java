@@ -1,5 +1,6 @@
 package th.co.geek;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -14,7 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import th.co.geek.action.UserLoginAction;
 import th.co.geek.bean.UserProfile;
+import th.co.geek.constant.Constant;
+import th.co.geek.dao.UserPostDAO;
 import th.co.geek.model.Login;
+import th.co.geek.model.Timeline;
 
 @Controller
 public class TimelineController {
@@ -22,13 +26,14 @@ public class TimelineController {
 	
 	
 	@RequestMapping(value="/timeline", method = RequestMethod.POST)
-	public ModelAndView onSubmit(@ModelAttribute("timelineForm")@Valid Login login, BindingResult result) {
-		System.out.println(login);
+	public ModelAndView onSubmit(@ModelAttribute("timelineForm")@Valid Timeline timeline, BindingResult result, HttpSession httpSession) {
+		System.out.println(timeline);
 		
 		if (result.hasErrors()) {
 			return new ModelAndView("timelineForm");
 		}
 		
+		UserPostDAO userPostDAO = UserPostDAO.getInstance();
 		
 		// check login
 		try {
@@ -41,19 +46,22 @@ public class TimelineController {
 		}
 		
 		
-		return new ModelAndView("loginSuccess","login",login);
+		return new ModelAndView("timelineForm","timeline",timeline);
 	}
 	
 	@RequestMapping(value = "/timeline",  method = RequestMethod.GET)
-	public String timeline() {
+	public String timeline(HttpSession session) {
+		
 		return "timelineForm";
 	}
 	
 	@ModelAttribute("timelineForm")
-	public Login loginForm() {
-		Login login = new Login();
-		 
-		return login;
+	public Timeline timelineForm(HttpSession session) {
+		Timeline timeline = new Timeline();
+		 UserProfile profile = (UserProfile)session.getAttribute(Constant.UserProfileSession);
+		 timeline.setUserName(profile.getName());
+		 System.out.println("AAAAAAAAAAA");
+		return timeline;
 	}
 	
 	
