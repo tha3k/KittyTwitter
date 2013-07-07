@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import redis.clients.jedis.Jedis;
+import th.co.geek.action.exception.UserDuplicateException;
 import th.co.geek.action.exception.UserNotfoundException;
 import th.co.geek.bean.DatabaseKey;
 import th.co.geek.bean.UserPost;
@@ -37,10 +38,18 @@ public class UserProfileDAO {
     }		
 		
 		
-	public void addUserProfile(UserProfile userProfile) {
+	public void addUserProfile(UserProfile userProfile) throws UserDuplicateException {
 		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
 
 		String key = DatabaseKey.USER_PREFIX+userProfile.getName();
+		
+		
+	// check for dupplicate
+		System.out.println(key);
+		if(jedis.exists(key)) {
+			throw new UserDuplicateException();
+		}
+		
 		jedis.hset(key, DatabaseKey.USER_NAME_KEY, userProfile.getName());
 		jedis.hset(key, DatabaseKey.USER_PASSWORD_KEY, userProfile.getPassword());
 		jedis.hset(key, DatabaseKey.USER_EMAIL_KEY, userProfile.getEmail());
