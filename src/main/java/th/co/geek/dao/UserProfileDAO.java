@@ -1,6 +1,8 @@
 package th.co.geek.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 import redis.clients.jedis.Jedis;
 import th.co.geek.action.exception.UserNotfoundException;
@@ -44,6 +46,21 @@ public class UserProfileDAO {
 		jedis.hset(key, DatabaseKey.USER_EMAIL_KEY, userProfile.getEmail());
 		
 	}
+	
+	public ArrayList<String> getAllUserNameList() throws Exception {
+		ArrayList<String> userNameList = new ArrayList<String>();
+		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
+		Set<String> allUserName = jedis.keys(DatabaseKey.USER_PREFIX+"*");
+		
+		Iterator<String> iteNameList = allUserName.iterator(); 
+		while (iteNameList.hasNext()) {
+			userNameList.add(iteNameList.next().replaceAll(DatabaseKey.USER_PREFIX, ""));
+		}		
+		return userNameList;
+	}
+	
+	
+	
 
 	public UserProfile mockUserProfile() {
 		UserProfile userProfile = new UserProfile();
@@ -71,6 +88,7 @@ public class UserProfileDAO {
 		UserProfileDAO a = new UserProfileDAO();
 		
 		a.addUserProfile(a.mockUserProfile());
+		System.out.println("all : "+a.getAllUserNameList());
 		UserProfile b = a.getUserProfile("tha3k");
 		System.out.println(b.getName());
 		System.out.println(b.getPassword());
