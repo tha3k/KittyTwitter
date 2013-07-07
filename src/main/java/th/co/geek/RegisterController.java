@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import th.co.geek.bean.UserProfile;
+import th.co.geek.dao.UserProfileDAO;
 import th.co.geek.model.Register;
 
 @Controller
@@ -40,6 +42,15 @@ public class RegisterController {
 			
 			return new ModelAndView("registerForm");
 		}
+		
+		UserProfile userProfile = new UserProfile();
+		userProfile.setName(register.getUserName());
+		userProfile.setEmail(register.getEmail());
+		userProfile.setPassword(register.getPassword());
+		UserProfileDAO userProfileDAO = UserProfileDAO.getInstance();
+		userProfileDAO.addUserProfile(userProfile);
+		
+		logger.debug("registerSuccess ");
 		return new ModelAndView("registerSuccess","register",register);
 	}
 	

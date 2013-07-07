@@ -17,23 +17,22 @@ import th.co.geek.bean.UserProfile;
 import th.co.geek.model.Login;
 
 @Controller
-public class LoginController {
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+public class TimelineController {
+	private static final Logger logger = LoggerFactory.getLogger(TimelineController.class);
 	
 	
-	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public ModelAndView onSubmit(@ModelAttribute("loginForm")@Valid Login login, BindingResult result) {
+	@RequestMapping(value="/timeline", method = RequestMethod.POST)
+	public ModelAndView onSubmit(@ModelAttribute("timelineForm")@Valid Login login, BindingResult result) {
 		System.out.println(login);
 		
 		if (result.hasErrors()) {
-			return new ModelAndView("loginForm");
+			return new ModelAndView("timelineForm");
 		}
 		
 		UserLoginAction loginAction = new UserLoginAction();
 		
 		// check login
 		try {
-			logger.debug("check authenticate ");
 			UserProfile userProfile = loginAction.authenticate(login.getUserName(), login.getPassword());
 			
 		} catch (Exception e) {
@@ -41,20 +40,19 @@ public class LoginController {
 			e.printStackTrace();
 			//not found user.
 			result.addError(new ObjectError("username", "Username Not Found. "));
-			logger.error("not found user ");
-			return new ModelAndView("loginForm");
+			return new ModelAndView("timelineForm");
 		}
 		
-		logger.debug("loginSuccess ");
+		
 		return new ModelAndView("loginSuccess","login",login);
 	}
 	
-	@RequestMapping(value = "/login",  method = RequestMethod.GET)
-	public String login() {
-		return "loginForm";
+	@RequestMapping(value = "/timeline",  method = RequestMethod.GET)
+	public String timeline() {
+		return "timelineForm";
 	}
 	
-	@ModelAttribute("loginForm")
+	@ModelAttribute("timelineForm")
 	public Login loginForm() {
 		Login login = new Login();
 		 
