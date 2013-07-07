@@ -1,7 +1,6 @@
 package th.co.geek.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import redis.clients.jedis.Jedis;
 import th.co.geek.action.exception.UserNotfoundException;
