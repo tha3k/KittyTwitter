@@ -33,7 +33,7 @@ public class LoginController {
 		
 		// check login
 		try {
-			logger.debug("check authenticate ");
+			System.out.println("check authenticate");
 			UserProfile userProfile = loginAction.authenticate(login.getUserName(), login.getPassword());
 			
 		} catch (Exception e) {
@@ -44,8 +44,7 @@ public class LoginController {
 			logger.error("not found user ");
 			return new ModelAndView("loginForm");
 		}
-		
-		logger.debug("loginSuccess ");
+		System.out.println("loginSuccess");
 		return new ModelAndView("loginSuccess","login",login);
 	}
 	
