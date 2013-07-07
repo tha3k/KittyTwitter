@@ -1,7 +1,6 @@
 package th.co.geek.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import redis.clients.jedis.Jedis;
 import th.co.geek.action.exception.UserNotfoundException;
@@ -20,7 +19,7 @@ public class UserProfileDAO {
 	}
 	
 	public UserProfile getUserProfile(String userName) throws Exception {
-		Jedis jedis = new Jedis("localhost");
+		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
 		String key = DatabaseKey.USER_PREFIX+userName;
 		
 		if(jedis.exists(key)) {
@@ -37,7 +36,7 @@ public class UserProfileDAO {
 		
 		
 	public void addUserProfile(UserProfile userProfile) {
-		Jedis jedis = new Jedis("localhost");
+		Jedis jedis = new Jedis(DatabaseKey.REDIS_SERVER);
 
 		String key = DatabaseKey.USER_PREFIX+userProfile.getName();
 		jedis.hset(key, DatabaseKey.USER_NAME_KEY, userProfile.getName());
@@ -56,7 +55,7 @@ public class UserProfileDAO {
 		
 		UserPost eachPost = new UserPost();
 		eachPost.setPostUser("tha3k");
-		eachPost.setPostDate(new Date());
+		eachPost.setPostDate("20130101");
 		eachPost.setPostContent("test post for mock!!");
 		eachPost.setCanDelete(false);
 		

@@ -1,19 +1,18 @@
 package th.co.geek.bean;
 
-import java.util.Date;
 
 public class UserPost {
-	private Date postDate;
+	private String postDate;
 	private String postUser;
 	private String postContent;
 
 	private boolean canDelete;
 
-	public Date getPostDate() {
+	public String getPostDate() {
 		return postDate;
 	}
 
-	public void setPostDate(Date postDate) {
+	public void setPostDate(String postDate) {
 		this.postDate = postDate;
 	}
 
